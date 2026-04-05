@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Владислав Лактюшин — дизайнер</title>
+  <style>
+    :root {
+      --bg: #070709;
+      --bg-soft: #101015;
+      --panel: rgba(255,255,255,0.04);
+      --panel-strong: rgba(255,255,255,0.06);
+      --text: #f7f7f4;
+      --muted: #a6a7b0;
+      --line: rgba(255,255,255,0.08);
+      --gold: #d8c4a0;
+      --gold-soft: rgba(216,196,160,0.18);
+      --glow: rgba(235,218,191,0.35);
+      --max: 1220px;
+      --radius: 28px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 18%, rgba(216,196,160,0.08), transparent 24%),
+        radial-gradient(circle at 88% 20%, rgba(255,255,255,0.06), transparent 18%),
+        radial-gradient(circle at 50% 100%, rgba(216,196,160,0.06), transparent 32%),
+        linear-gradient(180deg, #09090b 0%, #070709 45%, #050507 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7,7,9,0.66);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .brand-script {
+      font-family: "Brush Script MT", "Segoe Script", "Snell Roundhand", cursive;
+      font-size: 32px;
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(216,196,160,0.34), 0 0 28px rgba(216,196,160,0.12);
+      letter-spacing: 0.01em;
+      transform: translateY(3px);
+    }
+    .menu { display: flex; gap: 24px; color: var(--muted); font-size: 14px; }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 46px 0 64px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #d5d6db;
+      font-size: 13px;
+      background: rgba(255,255,255,0.02);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    h1 {
+      margin: 20px 0 16px;
+      font-size: clamp(50px, 9vw, 106px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 760px;
+    }
+    .title-script {
+      display: block;
+      font-family: "Brush Script MT", "Segoe Script", "Snell Roundhand", cursive;
+      font-size: clamp(42px, 6vw, 84px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      color: var(--gold);
+      text-shadow: 0 0 16px rgba(216,196,160,0.45), 0 0 34px rgba(216,196,160,0.14);
+      margin-top: 10px;
+      transform: rotate(-3deg);
+      transform-origin: left center;
+    }
+    .lead {
+      max-width: 670px;
+      font-size: clamp(18px, 2vw, 21px);
+      line-height: 1.62;
+      color: var(--muted);
+      margin: 0 0 28px;
+    }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+    .btn {
+      padding: 16px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      background: rgba(255,255,255,0.02);
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(216,196,160,0.35); }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(216,196,160,0.22), rgba(216,196,160,0.08));
+      border-color: rgba(216,196,160,0.22);
+      box-shadow: 0 0 0 1px rgba(216,196,160,0.08) inset, 0 0 30px rgba(216,196,160,0.08);
+    }
+
+    .proofs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 760px;
+    }
+    .proof {
+      padding: 18px 18px 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
+      border: 1px solid var(--line);
+    }
+    .proof strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .proof span { color: var(--muted); font-size: 14px; line-height: 1.45; }
+
+    .portrait-wrap {
+      position: relative;
+      padding: 24px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      min-height: 700px;
+      display: flex;
+      align-items: stretch;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+    }
+    .portrait-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -10% auto auto 10%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,196,160,0.22), rgba(216,196,160,0.04) 45%, transparent 70%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+    .portrait-wrap::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -80px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 68%);
+      pointer-events: none;
+    }
+    .portrait {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-radius: 24px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid rgba(255,255,255,0.08);
+      filter: saturate(0.95) contrast(1.03);
+    }
+    .portrait-note {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 32px;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(7,7,9,0.42), rgba(7,7,9,0.72));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+    }
+    .portrait-note strong { font-size: 20px; }
+    .portrait-note span { color: #d0d1d7; line-height: 1.5; }
+
+    section {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-top {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 26px;
+      margin-bottom: 30px;
+    }
+    .kicker {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      padding-top: 10px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+    }
+    .text {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.68;
+      max-width: 780px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .panel {
+      padding: 30px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+    .quote {
+      font-size: clamp(24px, 3.4vw, 40px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+    .quote em {
+      font-style: normal;
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(216,196,160,0.16);
+    }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: #d8d8de;
+      font-size: 14px;
+    }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(216,196,160,0.25); }
+    .thumb {
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 70% 30%, rgba(216,196,160,0.22), transparent 28%),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+    }
+    .thumb::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(180deg, rgba(7,7,9,0.2), rgba(7,7,9,0.58));
+    }
+    .thumb::after {
+      content: "LUXE CASE";
+      position: absolute;
+      left: 24px;
+      top: 22px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.58);
+    }
+    .card-body { padding: 24px; }
+    .card h3 { margin: 0 0 8px; font-size: 24px; }
+    .meta { margin-bottom: 12px; color: #d6d6dc; font-size: 14px; }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .trust-item {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+    .trust-item strong { display: block; font-size: 18px; margin-bottom: 8px; }
+    .trust-item span { color: var(--muted); line-height: 1.55; font-size: 14px; }
+
+    .contact-box {
+      display: grid;
+      gap: 24px;
+      padding: 34px;
+      border-radius: 30px;
+      border: 1px solid rgba(216,196,160,0.16);
+      background: linear-gradient(135deg, rgba(216,196,160,0.1), rgba(255,255,255,0.025));
+      box-shadow: 0 0 50px rgba(216,196,160,0.06);
+    }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .footer {
+      padding: 30px 0 44px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid, .section-top, .grid-2, .cards, .trust-grid, .proofs { grid-template-columns: 1fr; }
+      .portrait-wrap { min-height: auto; }
+    }
+    @media (max-width: 820px) {
+      .menu { display: none; }
+      .wrap { width: min(calc(100% - 28px), var(--max)); }
+      .portrait-note { left: 20px; right: 20px; bottom: 20px; }
+      section { padding: 78px 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <span>VLADISLAV</span>
+        <span class="brand-script">Лактюшин</span>
+      </div>
+      <div class="menu">
+        <a href="#about">Обо мне</a>
+        <a href="#works">Кейсы</a>
+        <a href="#trust">Подход</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">личный бренд / дизайнер / 3 года опыта / luxury minimal</div>
+        <h1>
+          Владислав
+          <span class="title-script">Лактюшин</span>
+          создаю дизайн, который выглядит дорого и вызывает доверие.
+        </h1>
+        <p class="lead">Мне 18, и за 3 года в дизайне я научился главному: сильный визуал должен не только цеплять, но и создавать спокойное ощущение уверенности. Мой стиль — серьёзный, люксовый и чистый, но без холодной дистанции. Со мной легко работать: я слышу задачу, аккуратно веду процесс и собираю решение, которому хочется доверять.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contact">Обсудить проект</a>
+          <a class="btn" href="#works">Смотреть кейсы</a>
+        </div>
+        <div class="proofs">
+          <div class="proof"><strong>3+</strong><span>года опыта в вебе, визуале и подаче личного бренда</span></div>
+          <div class="proof"><strong>18</strong><span>лет и уже собранный вкус, внимание к деталям и насмотренность</span></div>
+          <div class="proof"><strong>1 vibe</strong><span>люкс, серьёзность и доверительная атмосфера в одном стиле</span></div>
+        </div>
+      </div>
+
+      <div class="portrait-wrap">
+        <img class="portrait" src="vladislav_portrait_processed.png" alt="Портрет Владислава Лактюшина" />
+        <div class="portrait-note">
+          <strong>Визуально уверенно. По-человечески спокойно.</strong>
+          <span>Открытый, приятный и собранный образ усиливает личный бренд: серьёзная подача без лишней жёсткости, чтобы клиенту было легко тебе написать и начать работать.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-top">
+        <div class="kicker">обо мне</div>
+        <div>
+          <h2>Личный бренд, в котором есть вкус, статус и ощущение безопасности.</h2>
+          <p class="text">Я не про хаос ради эффекта. Я про чистую композицию, спокойную силу и визуал, который говорит: <strong style="color:#f4f4f1; font-weight:600;">этому человеку можно доверить задачу</strong>. Для меня дизайн — это не только картинка, а впечатление от общения, от структуры, от того, насколько уверенно и понятно подан проект.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel quote">«Хочу, чтобы мой дизайн ощущался <em>дорого</em>, выглядел <em>серьёзно</em> и при этом оставлял тёплое чувство: со мной будет легко.»</div>
+        <div class="panel">
+          <div class="kicker" style="padding-top:0; margin-bottom:12px;">специализация</div>
+          <div class="pill-list" style="margin-bottom:18px;">
+            <div class="pill">Портфолио-сайты</div>
+            <div class="pill">Лендинги</div>
+            <div class="pill">UI/UX</div>
+            <div class="pill">Премиальная подача</div>
+            <div class="pill">Личный бренд</div>
+          </div>
+          <div class="text" style="font-size:16px; max-width:none;">Моя подача строится на балансе: визуальная строгость + живая коммуникация. В результате сайт не выглядит холодным. Он выглядит взрослым, уверенным и располагающим.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="section-top">
+        <div class="kicker">кейсы</div>
+        <div>
+          <h2>Проекты, где стиль работает на впечатление.</h2>
+          <p class="text">Ниже я оставил более премиальную подачу карточек. Здесь потом просто заменишь названия, описания и превью на свои реальные проекты.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="card-body">
+            <h3>Maison Identity</h3>
+            <div class="meta">Личный бренд / сайт-портфолио / art direction</div>
+            <div class="text" style="font-size:16px;">Спокойная премиальная подача, крупная типографика и структура, которая сразу транслирует статус и вкус.</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="card-body">
+            <h3>Noir Studio</h3>
+            <div class="meta">Лендинг / web design / premium layout</div>
+            <div class="text" style="font-size:16px;">Люксовый минимализм для бренда, где важно не кричать, а создавать ощущение уверенного уровня.</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="card-body">
+            <h3>Atelier Frame</h3>
+            <div class="meta">UI / визуальная система / презентация</div>
+            <div class="text" style="font-size:16px;">Чистый интерфейс и дорогая визуальная рамка, чтобы продукт выглядел серьёзно и современно.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="wrap">
+      <div class="section-top">
+        <div class="kicker">почему со мной</div>
+        <div>
+          <h2>Та самая атмосфера доверия, о которой ты говорил.</h2>
+          <p class="text">Это можно назвать по-разному: располагающий образ, понятная коммуникация, ощущение лёгкости в работе. На сайте я собрал это в конкретные смыслы, чтобы клиент считал их буквально за первые секунды.</p>
+        </div>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item"><strong>Спокойная подача</strong><span>Без визуального шума и лишнего давления. Всё выглядит уверенно и аккуратно.</span></div>
+        <div class="trust-item"><strong>Открытый образ</strong><span>Фото и тексты создают впечатление, что ты приятный и надёжный человек, с которым легко общаться.</span></div>
+        <div class="trust-item"><strong>Чёткий процесс</strong><span>Клиенту важно понимать, что ты собранный. Это считывается через структуру и формулировки.</span></div>
+        <div class="trust-item"><strong>Люксовый тон</strong><span>Сайт выглядит дороже среднего, но не становится холодным или недоступным.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-top">
+        <div class="kicker">контакты</div>
+        <div>
+          <h2>Если нужен дизайнер с сильной подачей и нормальной коммуникацией — давай на связи.</h2>
+          <p class="text">Оставил контактный блок максимально чистым и статусным. Сюда просто подставь свои реальные ссылки.</p>
+        </div>
+      </div>
+      <div class="contact-box">
+        <div class="contact-links">
+          <a class="btn primary" href="https://t.me/yourusername" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn" href="mailto:hello@example.com">Email</a>
+          <a class="btn" href="https://www.behance.net/yourprofile" target="_blank" rel="noopener">Behance</a>
+        </div>
+        <div class="text" style="font-size:15px; max-width:none;">Замени на свои данные: Telegram, Email, Behance. Если будешь переносить это в Tilda, этот экран лучше собирать через Zero Block: слева крупный заголовок, справа кнопки и короткий текст.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer wrap">Владислав Лактюшин — дизайнер / личный бренд / luxury portfolio.</footer>
+</body>
+</html>
